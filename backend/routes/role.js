@@ -9,4 +9,6 @@ router.post('/choose', authenticateToken, roleController.chooseRole);
 // Get all roles
 router.get('/', roleController.getRoles);
 
+
+
 module.exports = router;

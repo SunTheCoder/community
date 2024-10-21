@@ -22,7 +22,7 @@ const roleController = {
     }
   },
 
-  getUserRoles: async (req, res) => {
+  getRoles: async (req, res) => {
     const { userId } = req.params;
 
     try {
