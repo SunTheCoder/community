@@ -30,6 +30,7 @@ const SignUpPage = () => {
       }
     } catch (err) {
       setError('Something went wrong');
+      err.message = err.message || err
     }
   };
 
