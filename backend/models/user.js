@@ -17,21 +17,14 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    bio: {
-      type: DataTypes.STRING(300),
-    },
-    role: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    }
   });
 
-  User.associate = function (models) {
-    // associations can be defined here
-    User.hasMany(models.Post, { foreignKey: 'user_id' });
-    // If you keep Roles table:
-    User.hasOne(models.Role, { foreignKey: 'user_id' });
+  User.associate = (models) => {
+    User.belongsToMany(models.Role, {
+      through: 'UserRoles',  // Junction table for many-to-many relationship
+      foreignKey: 'user_id',
+    });
   };
 
   return User;

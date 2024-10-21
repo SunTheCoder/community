@@ -8,19 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Users', // Refers to the Users table
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-      },
-      role: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
+        unique: true,  // Ensure role names are unique
       },
       createdAt: {
         allowNull: false,

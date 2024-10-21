@@ -3,19 +3,24 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const userController = {
-  signup: async (req, res) => {
-    try {
-      const { name, email, password, bio, role } = req.body;
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      const newUser = await User.create({ name, email, password: hashedPassword, bio, role });
-      const token = jwt.sign({ id: newUser.id, email: newUser.email, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-      res.status(201).json({ token });
-    } catch (err) {
-      res.status(400).json({ error: 'Error creating user' });
-    }
-  },
+    signup: async (req, res) => {
+        try {
+          const { name, email, password, bio } = req.body;
+      
+          // Hash the password
+          const hashedPassword = await bcrypt.hash(password, 10);
+      
+          // Create the user without a role
+          const newUser = await User.create({ name, email, password: hashedPassword, bio });
+      
+          // Generate a JWT
+          const token = jwt.sign({ id: newUser.id, email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      
+          res.status(201).json({ token });
+        } catch (err) {
+          res.status(400).json({ error: 'Error creating user' });
+        }
+      },
 
   login: async (req, res) => {
     try {

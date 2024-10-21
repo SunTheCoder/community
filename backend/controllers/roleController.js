@@ -1,23 +1,42 @@
-const { Role } = require('../models');
+const { User, Role } = require('../models');
 
 const roleController = {
-  createRole: async (req, res) => {
-    const { name } = req.body;
+  chooseRole: async (req, res) => {
+    const { roleName } = req.body;  // Role name chosen by the user
+    const { user } = req;  // The authenticated user from the token
 
     try {
-      const newRole = await Role.create({ name });
-      res.status(201).json(newRole);
+      const role = await Role.findOne({ where: { name: roleName } });
+
+      // Ensure the chosen role exists
+      if (!role) {
+        return res.status(400).json({ error: 'Invalid role selection' });
+      }
+
+      // Assign the role to the user
+      await user.addRole(role);
+
+      res.status(200).json({ message: `Role ${roleName} assigned successfully` });
     } catch (error) {
-      res.status(400).json({ error: 'Error creating role' });
+      res.status(400).json({ error: 'Error assigning role' });
     }
   },
 
-  getRoles: async (req, res) => {
+  getUserRoles: async (req, res) => {
+    const { userId } = req.params;
+
     try {
-      const roles = await Role.findAll();
-      res.json(roles);
+      const user = await User.findByPk(userId, {
+        include: [Role],  // Include associated roles
+      });
+
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      res.json(user.Roles);  // Return the user's roles
     } catch (error) {
-      res.status(400).json({ error: 'Error fetching roles' });
+      res.status(400).json({ error: 'Error fetching user roles' });
     }
   }
 };
