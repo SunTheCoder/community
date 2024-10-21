@@ -15,11 +15,7 @@ const validateSignup = [
     .isLength({ min: 6 })
     .withMessage('Password must be at least 6 characters long'),
 
-  body('roleName')
-    .notEmpty()
-    .withMessage('Role is required')
-    .isIn(['admin', 'caretaker', 'member'])
-    .withMessage('Invalid role selection'),
+  
 
   (req, res, next) => {
     const errors = validationResult(req);

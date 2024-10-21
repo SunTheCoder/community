@@ -5,19 +5,29 @@ const jwt = require('jsonwebtoken');
 const userController = {
     signup: async (req, res) => {
         try {
-          const { name, email, password, bio } = req.body;
+          console.log('Request Body:', req.body); // Log the incoming request
+          
+          const { name, email, password} = req.body;
+      console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Password:', password);
+          // Check if all fields are provided
+          if (!name || !email || !password) {
+            return res.status(400).json({ error: 'All fields are required' });
+          }
       
           // Hash the password
           const hashedPassword = await bcrypt.hash(password, 10);
       
-          // Create the user without a role
-          const newUser = await User.create({ name, email, password: hashedPassword, bio });
+          // Create the user
+          const newUser = await User.create({ name, email, password: hashedPassword});
       
           // Generate a JWT
           const token = jwt.sign({ id: newUser.id, email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
       
           res.status(201).json({ token });
         } catch (err) {
+          console.error('Error creating user:', err); // Log the error for debugging
           res.status(400).json({ error: 'Error creating user' });
         }
       },
@@ -25,6 +35,7 @@ const userController = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
+      console.log(req.body); 
       const user = await User.findOne({ where: { email } });
 
       if (!user) {
