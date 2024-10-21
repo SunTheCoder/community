@@ -1,0 +1,29 @@
+.profile-box {
+    grid-column: 3;
+    
+    
+    
+}
+
+.posts {
+    grid-column: 2;
+}
+
+.request-box {
+
+}
+
+.request-incoming {
+    grid-column: 1;
+}
+
+.request-outgoing {
+    grid-column: 1
+}
+
+.container {
+
+    display: grid;
+    grid-template-columns: 200px 1200px 200px;
+    grid-template-rows: 200px 1000px 
+}

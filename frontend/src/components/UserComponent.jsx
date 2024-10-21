@@ -36,6 +36,7 @@ const UserComponent = () => {
       dispatch(setUser(userInfo));
     } catch (err) {
       setError('Login failed. Please check your credentials.');
+      error(err);
     }
   };
 
@@ -49,12 +50,12 @@ const UserComponent = () => {
     <div>
       {user ? (
         <div>
-          <h2>Welcome, {user.email}</h2>
+          <h3>Welcome, {user.email}</h3>
           <button onClick={handleLogout}>Logout</button>
         </div>
       ) : (
         <div>
-          <h2>Please log in</h2>
+          <h3>Please log in</h3>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <input
             type="email"

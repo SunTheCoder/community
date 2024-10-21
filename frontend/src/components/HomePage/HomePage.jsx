@@ -16,12 +16,14 @@ const HomePage = () => {
   }
 
   return (
+    
     <div className='welcome-container'>
       <h1>Welcome to, Community.</h1>
       <p>“A true community begins in the hearts of the people involved. It is not a place of distraction but a place of being.” -Malidoma Patrice Somé</p>
       <button onClick={goToLoginPage}>Log In</button>  {/* Button to navigate */}
       <button onClick={goToSignUpPage}>Sign Up</button>  {/* Button to navigate */}
     </div>
+    
   );
 };
 

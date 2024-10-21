@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../slices/userSlice';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-
-  const dispatch = useDispatch();
+  const [error, setError] = useState('');
+  const dispatch = useDispatch(); // Assuming you're using Redux
+  
+  const navigate = useNavigate(); // Call useNavigate inside the component
 
   const handleLogin = async () => {
     try {
@@ -21,36 +23,36 @@ const LoginPage = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email,    // Make sure email is correctly passed
-          password  // Make sure password is correctly passed
+          email,
+          password,
         }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Login failed');
-      
       } else {
         setMessage('Login successful!');
         setError('');
-        // setName('');
-        // setEmail('');
-        // setPassword('');
+
+        const data = await response.json();
+        const token = data.token;
+
+        // Store token and update Redux state
+        localStorage.setItem('token', token);
+        const userInfo = { email };
+        dispatch(setUser(userInfo));
+
+        // Navigate to the profile page after login
+        navigate('/profile');  // Navigate after successful login
       }
-
-      const data = await response.json();
-      const token = data.token;
-
-      // Store token and update Redux state
-      localStorage.setItem('token', token);
-      const userInfo = { email };  // You can extract user info from token or API
-      dispatch(setUser(userInfo));
     } catch (err) {
-      console.log('bad!')
-      setMessage('')
+      console.log('bad!');
+      setMessage('');
       setError(err.message);
     }
   };
+
 
   return (
     <div>
