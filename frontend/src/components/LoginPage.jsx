@@ -13,7 +13,7 @@ const LoginPage = () => {
   const handleLogin = async () => {
     try {
       console.log('Email:', email);
-console.log('Password:', password);
+      console.log('Password:', password);
 
       const response = await fetch('http://localhost:5000/users/login', {
         method: 'POST',

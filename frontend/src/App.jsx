@@ -14,6 +14,8 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} /> {/* Add Sign-Up Route */}
         <Route path="/protected" element={<ProtectedRoute component={ProtectedPage} />} />
+
+        
       </Routes>
     </Router>
   );
