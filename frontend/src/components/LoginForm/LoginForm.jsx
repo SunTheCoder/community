@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../slices/userSlice';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Dispatch your login action here
+    
+    // Example: Static authentication, this could be replaced with real auth logic
+    if (email === 'test@example.com' && password === 'password') {
+      const user = { email, name: 'Test User' };
+      
+      // Dispatch setUser with the user data
+      dispatch(setUser(user));
+    } else {
+      alert('Invalid credentials');
+    }
   };
 
   return (

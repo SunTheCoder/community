@@ -35,7 +35,7 @@ const SplashPage = () => {
   return (
     <div className='page-container'>
         <div className='welcome-container'>
-          <h1>Welcome to, Community.</h1>
+          <h1>Welcome.</h1>
           <p>“A true community begins in the hearts of the people involved. It is not a place of distraction but a place of being.” -Malidoma Patrice Somé</p>
           <button onClick={handleLoginClick}>Login</button>
 
