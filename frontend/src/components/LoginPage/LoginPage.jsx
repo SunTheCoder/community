@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css'
 
-const HomePage = () => {
+const SplashPage = () => {
 
   const navigate = useNavigate();  // Hook to navigate programmatically
 
@@ -27,4 +27,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default SplashPage;

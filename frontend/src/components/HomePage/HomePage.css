@@ -1,0 +1,14 @@
+#home-page-container {
+    
+}
+#home-page-user-welcome-box {
+    display: flex;
+    justify-content: center;
+}
+#home-page-main {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 
+}
+

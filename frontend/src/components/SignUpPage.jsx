@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const [name, setName] = useState('');
@@ -6,8 +7,9 @@ const SignUpPage = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-
+  const navigate = useNavigate()
   const handleSignUp = async () => {
+    
     try {
       const response = await fetch('http://localhost:5000/users/signup', {
         method: 'POST',
@@ -27,6 +29,7 @@ const SignUpPage = () => {
         setName('');
         setEmail('');
         setPassword('');
+        navigate('/home')
       }
     } catch (err) {
       setError('Something went wrong');
