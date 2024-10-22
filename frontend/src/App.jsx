@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SplashPage from './components/LoginPage/LoginPage';
+import SplashPage from './components/SplashPage/SplashPage';
 import LoginPage from './components/LoginPage';
-import SignUpPage from './components/SignUpPage';
+import SignUpPage from './components/SignUpPage/SignUpPage';
 import ProtectedPage from './components/ProtectedPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './components/ProfilePage';

@@ -11,8 +11,7 @@ return (
     <div id="home-page-user-welcome-box">
 
         <h2>Hi, User!</h2>
-        
-       
+    
     </div>
    
     <div id="home-page-main"> 
