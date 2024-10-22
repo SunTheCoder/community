@@ -32,28 +32,36 @@ const userController = {
         }
       },
 
-  login: async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      console.log(req.body); 
-      const user = await User.findOne({ where: { email } });
-
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(400).json({ error: 'Invalid credentials' });
-      }
-
-      const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-      res.status(200).json({ token });
-    } catch (err) {
-      res.status(400).json({ error: 'Error logging in' });
-    }
-  },
+      
+      login: async (req, res) => {
+        const { email, password } = req.body;
+        console.log('Received email:', email, 'Received password:', password); // Logging to verify payload
+    
+        try {
+          // Find the user by email
+          const user = await User.findOne({ where: { email } });
+    
+          if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+          }
+    
+          // Compare the password with the stored hashed password
+          const isMatch = await bcrypt.compare(password, user.password);
+          if (!isMatch) {
+            return res.status(400).json({ error: 'Invalid credentials' });
+          }
+    
+          // Generate a JWT token
+          const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    
+          return res.status(200).json({ token, user: { id: user.id, email: user.email, name: user.name } });
+        } catch (err) {
+          return res.status(500).json({ error: 'Server error' });
+        }
+      },
+      
+      
+      
 
   getUsers: async (req, res) => {
     try {
