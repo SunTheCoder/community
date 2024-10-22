@@ -13,6 +13,11 @@ return (
     </div>
     <div id="home-page-main">
         <h3 id="home-page-latest" className=''>Latest in the Community</h3>
+        <h2 id="home-page-feeling" className=''>How are you feeling?</h2>
+        <h3 id="home-page-support" className=''>Support Circles</h3>
+        <div id="home-page-user-feeling-box">
+            <textarea name="how-user-feeling" id="home-page-feeling-response" placeholder="Your response will remain private."cols="30" rows="10"></textarea>
+        </div>
     </div>
  </div>
 )
